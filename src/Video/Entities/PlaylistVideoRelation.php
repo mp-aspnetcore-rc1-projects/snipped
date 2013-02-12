@@ -93,4 +93,32 @@ class PlaylistVideoRelation
     {
         return $this->video;
     }
+    /**
+     * @var \Video\Entities\Playlist
+     */
+    private $playlist;
+
+
+    /**
+     * Set playlist
+     *
+     * @param \Video\Entities\Playlist $playlist
+     * @return PlaylistVideoRelation
+     */
+    public function setPlaylist(\Video\Entities\Playlist $playlist = null)
+    {
+        $this->playlist = $playlist;
+    
+        return $this;
+    }
+
+    /**
+     * Get playlist
+     *
+     * @return \Video\Entities\Playlist 
+     */
+    public function getPlaylist()
+    {
+        return $this->playlist;
+    }
 }

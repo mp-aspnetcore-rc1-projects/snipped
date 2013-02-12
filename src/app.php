@@ -37,7 +37,7 @@ $app->register(new DoctrineORMServiceProvider(),array(
     "em.is_dev_mode"=>$app["debug"],
     "em.metadata"=>array(
         "type"=>"yaml",
-        "path"=>array(__DIR__."/Video/Entities/")
+        "path"=>array(dirname(__DIR__)."/config/entities/")
         ),
     )
 );
@@ -46,8 +46,8 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
 
 $app['routes'] = $app->share($app->extend('routes',function($routes,$app){
-    $loader = new YamlFileLoader(new FileLocator(__DIR__.'/../config/'));
-    $collection = $loader->load('routing.yml');
+    $loader = new YamlFileLoader(new FileLocator(__DIR__.'/../config/routing/'));
+    $collection = $loader->load('routes.yml');
     $routes->addCollection($collection);
     return $routes;
 }));

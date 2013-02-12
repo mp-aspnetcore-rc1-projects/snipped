@@ -11,7 +11,6 @@ Video\Entities\PlaylistVideoRelation:
             targetEntity: Video\Entities\Playlist
             mappedBy: playlist
             cascade: ["persist","merge","remove"]
-    oneToOne:
         video:
             targetEntity: Video\Entities\Video
             mappedBy: video

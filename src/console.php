@@ -19,4 +19,18 @@ $console
     })
 ;
 
+// Configure Doctrine ORM tool for Console cli
+use Symfony\Component\Console\Helper\HelperSet;
+use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
+use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
+$em = $app["em"];
+$console->setHelperSet(new HelperSet(array(
+    "em" => new EntityManagerHelper($em),
+    "db" => new ConnectionHelper($em->getConnection()),
+        )
+        )
+);
+Doctrine\ORM\Tools\Console\ConsoleRunner::addCommands($console);
+### ENDCUSTOMCODE
+
 return $console;

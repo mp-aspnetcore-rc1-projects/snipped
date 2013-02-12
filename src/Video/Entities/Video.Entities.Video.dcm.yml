@@ -1,0 +1,34 @@
+Video\Entities\Video:
+    type: entity
+    table: videos
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+        url:
+            type: string
+            length: 500
+        description:
+            type: string
+            length: 1000
+        screenshot_url:
+            type: string
+            length: 256
+        created_at:
+            type: datetime
+    oneToMany:
+        tags:
+            targetEntity: Video\Entities\Tag
+            mappedBy: video
+            cascade: ["persist","merge"]
+
+
+
+
+
+
+

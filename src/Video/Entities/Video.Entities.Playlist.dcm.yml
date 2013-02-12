@@ -1,0 +1,32 @@
+Video\Entities\Playlist:
+    type: entity
+    table: playlists
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+        description:
+            type: string
+            length: 512
+        image:
+            type: string
+            length: 256
+    # manyToMany:
+    #     videos:
+    #         targetEntity: Video\Entities\Video
+    #         joinTable:
+    #             name: playlists_videos
+    #             joinColumns:
+    #                 playlist_id:
+    #                     referencedColumnName: id
+    #             inverseJoinColumns:
+    #                 video_id:
+    #                     referencedColumnName: id
+    #             fields:
+    #                 order:
+    #                     type: integer
+

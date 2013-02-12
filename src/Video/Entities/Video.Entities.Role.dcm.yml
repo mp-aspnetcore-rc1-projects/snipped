@@ -1,0 +1,18 @@
+# Video/Entities/yaml/role.dcm.yml
+Video\Entities\Role:
+    type: entity
+    table: roles
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        label:
+            type: string
+    oneToMany:
+        users:
+            targetEntity: Video\Entities\User
+            mappedBy: role
+            cascade: ["persist","merge"]
+        

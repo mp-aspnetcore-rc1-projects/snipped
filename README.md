@@ -38,6 +38,26 @@ if (isset($_SERVER['SCRIPT_FILENAME'])) {
 then change dir to web folder and start the built-in server  `php -S localhost:8000 router.php`
 
 ### API :
+Summary of the API we are going to implement:
+
+HTTP verb   route               name
+
+GET         /video              video_list
+POST        /video              video_create
+GET         /video/{id}         video_get_by_id
+GET         /video/{title}      video_get_by_title
+PUT         /video/{id}         video_update
+DELETE      /video/{id}         video_delete
+
+GET         /playlist           playlist_list
+POST        /playlist           playlist_create
+GET         /playlist/{id}      playlist_get_by_id
+GET         /playlist/{title}   playlist_get_by_title
+PUT         /playlist/{id}      playlist_update
+DELETE      /playlist/{id}      playlist_delete
+
+GET         /tag                tag_list
+GET         /tag/{label}        tag_get_by_label
 
 ### Database and Models :
 we need 
@@ -83,10 +103,12 @@ playlists
 + description
 + image
 
-playlists_videos
+playlists_videos_relation
 + id
 + playlist_id
 + video_id
++ order
++ created_at
 
 we'll use doctrine/orm to deal with our database
 
@@ -167,7 +189,7 @@ you should see doctrine orm custom command list , like orm:info , and their desc
 
 create the yaml mapping files : @TODO
 
-generate the php classes : 
+generate the php classes from the mapping files : 
 
     php console orm:generate-entities src
 
@@ -177,9 +199,15 @@ generate the tables in the database :
 
 add --dump-sql > db.sql to the command to preview the sql in a db.sql file
 
-you validate to schema and the mapping files at any moment during development :
+you can validate to schema and the mapping files at any moment during development :
 
     php console orm:validate-schema
+
+### Forms
+
+
+
+
 
 
 

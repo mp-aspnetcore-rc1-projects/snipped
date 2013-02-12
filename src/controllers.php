@@ -6,6 +6,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Routing\Loader\YamlFileLoader;
+
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html', array());
 })
@@ -21,3 +24,5 @@ $app->error(function (\Exception $e, $code) use ($app) {
 
     return new Response($app['twig']->render($page, array('code' => $code)), $code);
 });
+
+

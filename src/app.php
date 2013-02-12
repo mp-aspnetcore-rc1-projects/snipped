@@ -6,6 +6,7 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 
 $app = new Application();
+$app["debug"] = true;
 $app->register(new UrlGeneratorServiceProvider());
 $app->register(new ValidatorServiceProvider());
 $app->register(new TwigServiceProvider(), array(
@@ -40,5 +41,15 @@ $app->register(new DoctrineORMServiceProvider(),array(
         ),
     )
 );
+//@note @sulex utiliser un fichier yaml pour la configuration des routes
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Routing\Loader\YamlFileLoader;
+
+$app['routes'] = $app->share($app->extend('routes',function($routes,$app){
+    $loader = new YamlFileLoader(new FileLocator(__DIR__.'/../config/'));
+    $collection = $loader->load('routing.yml');
+    $routes->addCollection($collection);
+    return $routes;
+}));
 
 return $app;

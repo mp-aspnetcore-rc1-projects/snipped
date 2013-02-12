@@ -1,0 +1,30 @@
+video_list:
+    pattern: /video
+    defaults: {_controller:   "Video\Controllers\VideoController::index"  }
+    methods: GET
+video_create:
+    pattern: /video
+    defaults: {_controller: "Video\Controllers\VideoController::create" }
+    methods: POST
+video_get_by_id:
+    pattern: /video/{id}
+    defaults: {_controller: "Video\Controllers\VideoController::getById" }
+    methods: GET
+    requirements:
+        id: \d+
+video_get_by_title:
+    pattern: /video/{title}
+    defaults: {_controller: "Video\Controllers\VideoController::getByTitle" }
+    methods: GET
+# PUT         /video/{id}         video_update
+# DELETE      /video/{id}         video_delete
+
+# GET         /playlist           playlist_list
+# POST        /playlist           playlist_create
+# GET         /playlist/{id}      playlist_get_by_id
+# GET         /playlist/{title}   playlist_get_by_title
+# PUT         /playlist/{id}      playlist_update
+# DELETE      /playlist/{id}      playlist_delete
+
+# GET         /tag                tag_list
+# GET         /tag/{label}        tag_get_by_label

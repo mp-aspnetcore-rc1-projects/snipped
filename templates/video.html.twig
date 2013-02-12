@@ -1,0 +1,9 @@
+{%extends 'layout.html' %}
+{% block title 'video list'%}
+{% block content %}
+{% if id is defined %}
+Video with id {{id}}
+{% elseif title is defined %}
+Video with title {{title}}
+{% endif %}
+{% endblock %}

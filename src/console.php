@@ -9,14 +9,14 @@ use Symfony\Component\Console\Input\InputOption;
 $console = new Application('My Silex Application', 'n/a');
 
 $console
-    ->register('my-command')
-    ->setDefinition(array(
+->register('my-command')
+->setDefinition(array(
         // new InputOption('some-option', null, InputOption::VALUE_NONE, 'Some help'),
     ))
-    ->setDescription('My command description')
-    ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
+->setDescription('My command description')
+->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
         // do something
-    })
+})
 ;
 
 // Configure Doctrine ORM tool for Console cli
@@ -27,10 +27,9 @@ $em = $app["em"];
 $console->setHelperSet(new HelperSet(array(
     "em" => new EntityManagerHelper($em),
     "db" => new ConnectionHelper($em->getConnection()),
-        )
-        )
+    )
+)
 );
 Doctrine\ORM\Tools\Console\ConsoleRunner::addCommands($console);
-### ENDCUSTOMCODE
 
 return $console;

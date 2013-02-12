@@ -121,4 +121,47 @@ class PlaylistVideoRelation
     {
         return $this->playlist;
     }
+    /**
+     * @var integer
+     */
+    private $id;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return PlaylistVideoRelation
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
 }

@@ -40,24 +40,24 @@ then change dir to web folder and start the built-in server  `php -S localhost:8
 ### API :
 Summary of the API we are going to implement:
 
-HTTP verb   route               name
+    HTTP verb   route               name
 
-GET         /video              video_list
-POST        /video              video_create
-GET         /video/{id}         video_get_by_id
-GET         /video/{title}      video_get_by_title
-PUT         /video/{id}         video_update
-DELETE      /video/{id}         video_delete
+    GET         /video              video_list
+    POST        /video              video_create
+    GET         /video/{id}         video_get_by_id
+    GET         /video/{title}      video_get_by_title
+    PUT         /video/{id}         video_update
+    DELETE      /video/{id}         video_delete
 
-GET         /playlist           playlist_list
-POST        /playlist           playlist_create
-GET         /playlist/{id}      playlist_get_by_id
-GET         /playlist/{title}   playlist_get_by_title
-PUT         /playlist/{id}      playlist_update
-DELETE      /playlist/{id}      playlist_delete
+    GET         /playlist           playlist_list
+    POST        /playlist           playlist_create
+    GET         /playlist/{id}      playlist_get_by_id
+    GET         /playlist/{title}   playlist_get_by_title
+    PUT         /playlist/{id}      playlist_update
+    DELETE      /playlist/{id}      playlist_delete
 
-GET         /tag                tag_list
-GET         /tag/{label}        tag_get_by_label
+    GET         /tag                tag_list
+    GET         /tag/{label}        tag_get_by_label
 
 ### Database and Models :
 we need 

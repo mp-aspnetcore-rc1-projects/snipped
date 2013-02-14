@@ -1,4 +1,3 @@
-# Video/Entities/yaml/role.dcm.yml
 Video\Entities\Role:
     type: entity
     table: roles

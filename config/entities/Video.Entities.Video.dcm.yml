@@ -25,10 +25,3 @@ Video\Entities\Video:
             targetEntity: Video\Entities\Tag
             mappedBy: video
             cascade: ["persist","merge"]
-
-
-
-
-
-
-

@@ -7,17 +7,23 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 $console = new Application('My Silex Application', 'n/a');
-
 $console
-->register('my-command')
+->register('twig:cache:delete')
 ->setDefinition(array(
         // new InputOption('some-option', null, InputOption::VALUE_NONE, 'Some help'),
     ))
-->setDescription('My command description')
+->setDescription('Delete twig cache files')
 ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
-        // do something
+        $cachePath = $app["twig.options"]["cache"];
+        $dir = new \DirectoryIterator($cachePath);
+        foreach($dir as $file){
+            if($file->isDot())continue;
+            exec("rm -rf ".$file->getRealPath());
+        }
+        $output->writeln("$cachePath is now empty.");
 })
 ;
+
 
 // Configure Doctrine ORM tool for Console cli
 use Symfony\Component\Console\Helper\HelperSet;

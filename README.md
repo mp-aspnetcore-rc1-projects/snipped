@@ -16,10 +16,11 @@ and watch them on a single website. I needed to be able to tag the videos so i c
 
 #### Configuration :
 + define the following environment variables (use setx on windows, use export on linux):
-    + SILEX_VIDEO_DB database name
-    + SILEX_VIDEO_HOST database host
-    + SILEX_VIDEO_USER db username
-    + SILEX_VIDEO_PASSWORD db password
+    + VIDEO_DB database name
+    + VIDEO_HOST database host
+    + VIDEO_USER db username
+    + VIDEO_PASSWORD db password
+    + VIDEO_DRIVER pdo_mysql,pdo_sqlite,etc...
 
 + use composer to install silex-skeleton
     composer create-project fabpot/silex-skeleton -sdev

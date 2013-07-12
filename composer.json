@@ -11,12 +11,9 @@
         "mparaiso/simpleuserserviceprovider":"*@dev",
         "mparaiso/doctrineormserviceprovider":"*@dev"
         },
-        "require-dev":{
-            "phpunit/phpunit":"*"
-        },
         "autoload":{
             "psr-0":{
-                "":"app"
+                "":["app","lib"]
             }
         }
     }

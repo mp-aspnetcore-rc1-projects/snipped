@@ -7,11 +7,13 @@
         "monolog/monolog":">=1.0.0,<1.2-dev",
         "symfony/symfony":"2.3.*",
         "doctrine/orm":"2.*",
-        "mparaiso/consoleserviceprovider":"*",
-        "mparaiso/simpleuserserviceprovider":"*",
-        "mparaiso/doctrineormserviceprovider":"*"
+        "mparaiso/consoleserviceprovider":"*@dev",
+        "mparaiso/simpleuserserviceprovider":"*@dev",
+        "mparaiso/doctrineormserviceprovider":"*@dev"
         },
-        "minimum-stability":"dev",
+        "require-dev":{
+            "phpunit/phpunit":"*"
+        },
         "autoload":{
             "psr-0":{
                 "":"app"

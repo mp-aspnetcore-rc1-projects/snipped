@@ -1,4 +1,4 @@
-/vendor/
-/cache/
-silex.log
+vendor/*
+temp/*
+inspiration/*
 

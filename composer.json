@@ -2,18 +2,20 @@
     "name":"fabpot/silex-skeleton",
     "require":{
         "php":">=5.3.3",
-        "silex/silex":"1.0.*",
-        "twig/twig":">=1.8.0,<2.0-dev",
-        "monolog/monolog":">=1.0.0,<1.2-dev",
+        "silex/silex":"1.*",
+        "twig/twig":"*",
+        "monolog/monolog":"*",
         "symfony/symfony":"2.3.*",
         "doctrine/orm":"2.*",
         "mparaiso/consoleserviceprovider":"*@dev",
         "mparaiso/simpleuserserviceprovider":"*@dev",
-        "mparaiso/doctrineormserviceprovider":"*@dev"
-        },
-        "autoload":{
-            "psr-0":{
-                "":["app","lib"]
-            }
+        "mparaiso/doctrineormserviceprovider":"*@dev",
+        "mparaiso/crudserviceprovider":"*@dev",
+        "doctrine/doctrine-bundle ":"*"
+    },
+    "autoload":{
+        "psr-0":{
+            "":["app", "lib"]
         }
     }
+}

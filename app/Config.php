@@ -3,9 +3,18 @@
  * Configuration
  */
 use Silex\Application;
+use Mparaiso\Provider\VideoServiceProvider;
+use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\MonologServiceProvider;
+use Monolog\Handler\Mongo;
+use Silex\Provider\UrlGeneratorServiceProvider;
+use Mparaiso\Provider\CrudServiceProvider;
+use Silex\Provider\ValidatorServiceProvider;
+use Silex\Provider\TranslationServiceProvider;
+use Silex\Provider\FormServiceProvider;
+use Mparaiso\Provider\ConsoleServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
 use Mparaiso\Provider\DoctrineORMServiceProvider;
-use Mparaiso\Video\Provider\VideoServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 
 class Config implements Silex\ServiceProviderInterface
@@ -13,6 +22,8 @@ class Config implements Silex\ServiceProviderInterface
 
     function register(Application $app)
     {
+        $app->register(new SessionServiceProvider);
+        $app->register(new ConsoleServiceProvider);
         // FR: configure Twig
         $app->register(new TwigServiceProvider, array(
             "twig.path" => __DIR__ . "/Resources/views",
@@ -21,14 +32,26 @@ class Config implements Silex\ServiceProviderInterface
             )
         ));
 
+        $app->register(new MonologServiceProvider, array(
+            "monolog.logfile" => __DIR__ . "/../temp/log/log-" . date("Y-m-d") . ".txt"
+        ));
+
+        $app->register(new FormServiceProvider);
+
+        $app->register(new TranslationServiceProvider);
+
+        $app->register(new ValidatorServiceProvider);
+
+        $app->register(new UrlGeneratorServiceProvider);
+
         // FR: configure doctrine DBAL
         $app->register(new DoctrineServiceProvider, array(
-            "db.config" => array(
-                "driver"=>getenv("VIDEO_DRIVER"),
-                "host"=>getenv("VIDEO_HOST"),
-                "user"=>getenv("VIDEO_USER"),
-                "password"=>getenv("VIDEO_PASSWORD"),
-                "database"=>getenv("VIDEO_DB")
+            "db.options" => array(
+                "driver" => getenv("VIDEO_DRIVER"),
+                "host" => getenv("VIDEO_HOST"),
+                "user" => getenv("VIDEO_USER"),
+                "password" => getenv("VIDEO_PASSWORD"),
+                "dbname" => getenv("VIDEO_DB")
             )
         ));
         // FR : configure doctrine ORM
@@ -36,13 +59,13 @@ class Config implements Silex\ServiceProviderInterface
             "orm.proxy_dir" => __DIR__ . "/Proxy",
             "orm.driver.configs" => array(
                 "default" => array(
-                    "paths" => array(__DIR__ . '\..\lib\Mparaiso\Video\Entity'),
+                    "paths" => array(__DIR__ . '/../lib/Mparaiso/Video/Entity'),
                     "type" => "annotation",
-                    "namespace" => '\Mparaiso\Video\Entity'
+                    "namespace" => 'Mparaiso\Video\Entity'
                 )
             )
         ));
-
+        $app->register(new CrudServiceProvider);
         $app->register(new VideoServiceProvider);
     }
 

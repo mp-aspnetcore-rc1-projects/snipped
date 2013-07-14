@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="">Admin {{ resourceName }}</a>
+
+            <ul class="nav pull-right">
+                <li><a href="#">logout</a></li>
+            </ul>
+        </div>
+    </div>
+    <ul class="nav nav-tabs">
+        <li><a href="{{ path("mp_crud_client_index") }}">Clients</a></li>
+        <li><a href="{{ path("mp_crud_video_index") }}">Videos</a></li>
+        <li><a href="{{ path("mp_crud_playlist_index") }}">Playlists</a></li>
+        <li><a href="{{ path("mp_crud_tag_index") }}">Tags</a></li>
+        <li><a href="{{ path("mp_crud_article_index") }}">Articles</a></li>
+        <li><a href="{{ path("mp_crud_category_index") }}">Categories</a></li>
+        <li><a href="{{ path("mp_crud_playlistVideo_index") }}">Playlist videos</a></li>
+    </ul>
+    {% block mp_crud_content %}
+    {% endblock %}
+    {% block scripts %}
+        {{ parent() }}
+        <script type="text/javascript" src="/static/javascripts/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/javascripts/scripts.js"></script>
+    {% endblock %}
+{% endblock %}

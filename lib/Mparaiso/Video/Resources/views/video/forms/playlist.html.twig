@@ -1,0 +1,10 @@
+{{ form_row(form.title) }}
+<h4>Videos</h4>
+<ol class="doctrine-collection" data-prototype="{{ form_widget(form.playlistVideos.vars.prototype)|e }}">
+    {% for video in form.playlistVideos %}
+        <li>
+            {{ form_row(video) }}
+        </li>
+    {% endfor %}
+</ol>
+{{ form_rest(form) }}

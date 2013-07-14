@@ -1,0 +1,17 @@
+body {
+    font-size: 100%;
+    font-family: Arial, sans-serif;
+}
+
+input, textarea, select {
+    width: 300px;
+}
+
+button, input, a.btn {
+    border: 1px solid #CCC !important;
+}
+
+* {
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}

@@ -1,0 +1,15 @@
+{{ form_row(form.title) }}
+{{ form_row(form.link) }}
+{{ form_row(form.poster_url) }}
+{{ form_row(form.description) }}
+{{ form_row(form.client) }}
+{{ form_row(form.favorite,{label_attr:{style:"float:left;margin-right:5px;line-height:25px;"}}) }}
+<h4>Tags</h4>
+<ol class="doctrine-collection" data-prototype="{{ form_widget(form.tags.vars.prototype)|e }}">
+    {% for tag in form.tags %}
+        <li>
+            {{ form_widget(tag.title) }}
+        </li>
+    {% endfor %}
+</ol>
+{{ form_rest(form) }}

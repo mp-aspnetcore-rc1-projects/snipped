@@ -70,6 +70,10 @@ we need
     + only one user authenticated , the SUPER_ADMIN
     + other users can submit video links, all the admins has to do it validate them
 
+client
++ id
++ name
+
 videos
 + id
 + title

@@ -1,0 +1,37 @@
+{% extends app["video.layout"] %}
+{% block mp_video_content %}
+    <div class="row">
+
+        <div class="span2" style="margin-top:25%;">
+            {% if video_previous !=null %}
+                <a
+                        href="{{ path("mp_video_read",{id:video_previous.id,name:video_previous.title|url_encode}) }}">
+                    <img class="video-thumbnail-small" src="{{ video_previous.posterUrl }}"
+                         alt="{{ video_previous.title }}"
+                         title="{{ video_previous.title }}">
+                </a>
+            {% endif %}
+
+        </div>
+        <div class="  span8">
+            <iframe id="ytplayer" type="text/html" width="640" height="390"
+                    src="http://www.youtube.com/embed/{{ app["video.service.youtube"].getIdFromUrl(video.link) }}?showinfo=0&controls=0"
+                    frameborder="0" seamless="true">
+                <img src="{{ video.posterUrl }}" alt="{{ video.title }}">
+            </iframe>
+
+            <h5>{{ video.title }}</h5>
+
+            <p>{{ video.description }}</p>
+        </div>
+
+        <div class="span2" style="margin-top:25%;">
+            {% if video_next !=null %}
+                <a href="{{ path("mp_video_read",{id:video_next.id,name:video_next.title|url_encode}) }}"
+                        ><img class="video-thumbnail-small" src="{{ video_next.posterUrl }}"
+                              alt="{{ video_next.title }}"
+                              title="{{ video_next.title }}"></a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

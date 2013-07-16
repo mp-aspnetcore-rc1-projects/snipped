@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    {% block mp_video_header %}
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="/">Video Blog</a>
+                    <ul class="nav pull-right">
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Clients</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <div class="container">
+        {% block mp_video_content %}
+        {% endblock %}
+    </div>
+{% endblock %}

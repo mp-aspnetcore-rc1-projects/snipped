@@ -3,7 +3,10 @@ namespace Mparaiso\Video\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ *
  * @Entity
+ * @Table(name="mp_video_categories")
+ *
  */
 class Category
 {

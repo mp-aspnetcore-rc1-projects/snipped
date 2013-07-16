@@ -3,8 +3,11 @@
 namespace Mparaiso\Video\Entity;
 
 /**
+ *
  * @Entity
  * @HasLifecycleCallbacks
+ * @Table(name="mp_video_articles")
+ *
  */
 class Article
 {

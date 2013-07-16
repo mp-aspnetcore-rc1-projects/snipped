@@ -5,6 +5,11 @@
 namespace Mparaiso\Provider;
 
 use Silex\ServiceProviderInterface;
+use Mparaiso\Video\Controller\Index;
+use Mparaiso\Video\Controller\CRUD\Video as VideoCRUD;
+use Mparaiso\Video\Service\Video as VideoService;
+use Doctrine\Common\Cache\ApcCache;
+use Mparaiso\Video\Service\YouTube;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Mparaiso\CodeGeneration\Controller\CRUD;
 use Mparaiso\Video\Service\Base;
@@ -16,6 +21,21 @@ class VideoServiceProvider implements ServiceProviderInterface
     function register(Application $app)
     {
         $app['video'] = array("title" => "Silex Video");
+
+        $app["video.service.youtube.clientkey"] = getenv("VIDEO_YOUTUBE_CLIENTKEY");
+        $app["video.http.cache"] = $app->share(function ($app) {
+            $cache = null;
+            if (function_exists("apc_cache_info")) {
+                $cache = new ApcCache();
+                $cache->setNamespace("mp_video");
+            }
+            return $cache;
+        });
+        $app["video.service.youtube"] = $app->share(function ($app) {
+            return new YouTube($app["video.service.youtube.clientkey"],
+                $app["dispatcher"],
+                $app["video.http.cache"]);
+        });
 
         // Models and Entities
         $app['video.model.video'] = '\Mparaiso\Video\Entity\Video';
@@ -36,7 +56,7 @@ class VideoServiceProvider implements ServiceProviderInterface
 
         // services , allow controllers to access data stored in databases
         $app['video.service.video'] = $app->share(function ($app) {
-            return new Base($app['orm.em'], $app['video.model.video']);
+            return new VideoService($app['orm.em'], $app['video.model.video']);
         });
         $app['video.service.playlist'] = $app->share(function ($app) {
             return new Base($app['orm.em'], $app['video.model.playlist']);
@@ -58,9 +78,11 @@ class VideoServiceProvider implements ServiceProviderInterface
         });
         // controllers
         // ADMIN CRUD Controllers
+        $app['video.layout'] = "video/layout.html.twig";
         $app['video.crud.params.templateLayout'] = "video/crud.layout.html.twig";
+
         $app['video.crud.controller.video'] = $app->share(function ($app) {
-            return new CRUD(array(
+            $crud = new VideoCRUD(array(
                 "entityClass" => $app["video.model.video"],
                 "formClass" => $app['video.form.video'],
                 "service" => $app["video.service.video"],
@@ -70,7 +92,10 @@ class VideoServiceProvider implements ServiceProviderInterface
                 "templateLayout" => $app['video.crud.params.templateLayout'],
                 "formTemplate" => "video/forms/video.html.twig",
             ));
+            $crud->bulkActions["bulkFavorite"] = "Promote to homepage";
+            return $crud;
         });
+
         $app['video.crud.controller.client'] = $app->share(function ($app) {
             return new CRUD(array(
                 "entityClass" => $app["video.model.client"],
@@ -143,17 +168,45 @@ class VideoServiceProvider implements ServiceProviderInterface
             ));
         });
 
+        /**
+         * Controllers
+         */
+        $app["video.controller.index"] = $app->share(function ($app) {
+            return new Index;
+        });
+
         $app['twig.loader.filesystem'] = $app->share($app->extend('twig.loader.filesystem', function ($loader, $app) {
             /* @var Twig_Loader_Filesystem $loader */
             $loader->addPath(__DIR__ . "/../Video/Resources/views/");
             return $loader;
         }));
+
+
+        $app["video.events.video.before_save"] = $app->protect(function (GenericEvent $ev) use ($app) {
+            $video = $ev->getSubject();
+            /* @var \Mparaiso\Video\Entity\Video $video */
+            $url = $video->getLink();
+            if (YouTube::isYoutubeUrl($url)) {
+                if ($video->getPosterUrl() == null) {
+                    $video->setPosterUrl($app["video.service.youtube"]->getThumbnailUrlFromUrl($url));
+                }
+                if ($video->getTitle() == null) {
+                    $video->setTitle($app["video.service.youtube"]->getTitleFromUrl($url));
+                }
+                if ($video->getDescription() == null) {
+                    $video->setDescription($app["video.service.youtube"]->getDescriptionFromUrl($url));
+                }
+            }
+
+        });
+
+
     }
 
     function boot(Application $app)
     {
 
-
+        $app->mount("/", $app["video.controller.index"]);
         $app->get("/admin", array($app["video.crud.controller.video"], "index"));
         $app->mount("/admin", $app["video.crud.controller.video"]);
         $app->mount("/admin", $app["video.crud.controller.client"]);
@@ -172,6 +225,17 @@ class VideoServiceProvider implements ServiceProviderInterface
             }
             $app["orm.em"]->flush();
         });
+
+        $app->on(YouTube::REQUEST_ERROR, function (GenericEvent $ev) use ($app) {
+            $app["logger"]->error(print_r($ev->getSubject(), true));
+        });
+
+        $app->on(YouTube::REQUEST_SUCCESS, function (GenericEvent $ev) use ($app) {
+            $app["logger"]->info(print_r($ev->getSubject(), true));
+        });
+
+        $app->on("video_before_create", $app["video.events.video.before_save"]);
+        $app->on("video_before_update", $app["video.events.video.before_save"]);
 
     }
 }

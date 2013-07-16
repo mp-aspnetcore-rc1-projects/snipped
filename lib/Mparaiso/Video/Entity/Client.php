@@ -5,8 +5,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Mparaiso\Video\Entity\Video;
 
 /**
+ *
  * @Entity
  * @HasLifecycleCallbacks
+ * @Table(name="mp_video_clients")
+ *
  */
 class Client
 {

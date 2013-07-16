@@ -5,8 +5,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Mparaiso\Video\Entity\PlaylistVideo;
 
 /**
+ *
  * @Entity
+ * @Table(name="mp_video_videos")
  * @HasLifecycleCallbacks
+ *
  */
 class Video
 {
@@ -38,7 +41,7 @@ class Video
     protected $poster_url;
 
     /**
-     * @Column(type="string")
+     * @Column(type="text",length=2000)
      * @var string
      */
     protected $description;

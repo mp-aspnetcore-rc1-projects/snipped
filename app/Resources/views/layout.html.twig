@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ app.video.title }} </title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="/static/stylesheets/styles.css">
+    {% endblock %}
 </head>
 <body>
-<div class="container">
-    {% block content %}{% endblock %}
-</div>
-<link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap-responsive.min.css">
-<link rel="stylesheet" href="/static/stylesheets/styles.css">
+{% block content %}{% endblock %}
+{% block javascripts %}
+{% endblock %}
 </body>
 </html>

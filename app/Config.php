@@ -3,6 +3,7 @@
  * Configuration
  */
 use Silex\Application;
+use Silex\Provider\ServiceControllerServiceProvider;
 use Mparaiso\Provider\VideoServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\MonologServiceProvider;
@@ -22,6 +23,8 @@ class Config implements Silex\ServiceProviderInterface
 
     function register(Application $app)
     {
+        // controllers as services
+        $app->register(new ServiceControllerServiceProvider);
         $app->register(new SessionServiceProvider);
         $app->register(new ConsoleServiceProvider);
         // FR: configure Twig
@@ -71,10 +74,12 @@ class Config implements Silex\ServiceProviderInterface
 
     function boot(Application $app)
     {
+
+
         // homepage
-        $app->match("/", function (Application $app) {
-            return $app["twig"]->render("index.html.twig", array(
-                "message" => "Hello Silex Video"));
-        });
+//        $app->match("/", function (Application $app) {
+//            return $app["twig"]->render("index.html.twig", array(
+//                "message" => "Hello Silex Video"));
+//        });
     }
 }

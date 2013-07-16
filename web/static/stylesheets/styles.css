@@ -15,3 +15,41 @@ button, input, a.btn {
     border-radius: 0px !important;
     box-shadow: none !important;
 }
+
+.font-small {
+    font-size: 80%;
+}
+
+.fixed-height {
+    max-height: 500px;
+    line-break: loose;
+}
+
+.video {
+    position: relative;
+}
+
+.video:hover .video-description {
+    opacity: 0.9;
+    visibility: visible;
+
+}
+
+.video-thumbnail-small {
+    width: 100px;
+}
+
+.video-description {
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    visibility: collapse;
+    position: absolute;
+    bottom: 5px;
+    background-color: #555;
+    opacity: 0;
+    color: #FFF;
+    width: 96.3%;
+    margin-left: 0;
+    padding-left: 0;
+    text-align: justify;
+}

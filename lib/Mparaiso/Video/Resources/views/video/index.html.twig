@@ -1,0 +1,16 @@
+{% extends app["video.layout"] %}
+{% block mp_video_content %}
+    <div class="row thumbnails">
+        {% for video in videos %}
+            <div class="span3 video">
+                <a class="thumbnail" href="{{ path("mp_video_read",{id:video.id,name:video.title|url_encode}) }}">
+                    <img src="{{ video.posterUrl }}" alt="">
+                    <span class="video-description">
+                        <h5>{{ video.title }}</h5>
+                        {#<span class="font-small small">{{ video.description[0:100] }}</span>#}
+                    </span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

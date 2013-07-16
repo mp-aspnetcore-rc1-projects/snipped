@@ -5,6 +5,8 @@ namespace Mparaiso\Video\Entity;
 /**
  *
  * @Entity
+ * @Table(name="mp_video_playlistvideos")
+ *
  */
 class PlaylistVideo
 {

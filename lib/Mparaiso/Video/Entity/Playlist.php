@@ -4,8 +4,11 @@ namespace Mparaiso\Video\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ *
  * @Entity
  * @HasLifecycleCallbacks
+ * @Table(name="mp_video_playlists")
+ *
  */
 class Playlist
 {

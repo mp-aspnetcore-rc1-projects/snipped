@@ -18,8 +18,10 @@
         <li><a href="{{ path("mp_crud_category_index") }}">Categories</a></li>
         <li><a href="{{ path("mp_crud_playlistVideo_index") }}">Playlist videos</a></li>
     </ul>
-    {% block mp_crud_content %}
-    {% endblock %}
+    <div class="container">
+        {% block mp_crud_content %}
+        {% endblock %}
+    </div>
     {% block scripts %}
         {{ parent() }}
         <script type="text/javascript" src="/static/javascripts/jquery.min.js"></script>
